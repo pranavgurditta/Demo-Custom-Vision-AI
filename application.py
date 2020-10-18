@@ -15,19 +15,10 @@ def search_topic():
 def result():
    if request.method == 'POST':
       result = request.form
-      s=""
-      for key, value in result.items():
-          s=value
-      ss=running_youtube.main(s)
-      print("ss is",ss)
-      print("ss is",type(ss))
-      img_url=[]
-      url1=[]
-      for video in ss:
-            urls = "https://img.youtube.com/vi/"+video[0]+"/maxresdefault.jpg"
-            img_url.append(urls)
-            url_video="https://www.youtube.com/watch?v="+video[0]
-            url1.append(url_video)
-      return render_template("result.html",result = url1,url=img_url)
+      data={"Url":"https://i1.wp.com/www.kalimbatutorials.com/wp-content/uploads/2020/05/Imahe-By-Magnus-Haven-Kalimba-Tabs-1-e1590120483133.jpg?resize=1080%2C607&ssl=1"}
+      headers = {'Prediction-Key':'de012887ce6147f18b0b2e27c3228860','Content-Type': 'application/json'}  
+      r = requests.post(url = "https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/4f926a80-ab91-46c0-88e4-341f6e1ce08b/classify/iterations/Iteration2/url?", data = data,headers=headers)
+      
+      return render_template("result.html",result = r,url=img_url)
 if __name__ == "__main__":
     app.run(debug=True)
