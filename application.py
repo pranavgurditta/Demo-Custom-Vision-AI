@@ -15,10 +15,14 @@ def search_topic():
 def result():
    if request.method == 'POST':
       result = request.form
-      data={"Url":"https://i1.wp.com/www.kalimbatutorials.com/wp-content/uploads/2020/05/Imahe-By-Magnus-Haven-Kalimba-Tabs-1-e1590120483133.jpg?resize=1080%2C607&ssl=1"}
-      headers = {'Prediction-Key':'de012887ce6147f18b0b2e27c3228860','Content-Type': 'application/json'}  
-      r = requests.post(url = "https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/4f926a80-ab91-46c0-88e4-341f6e1ce08b/classify/iterations/Iteration2/url?", data = data,headers=headers)
-      
-      return render_template("result.html",result = r,url=img_url)
+      url = "https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/4f926a80-ab91-46c0-88e4-341f6e1ce08b/classify/iterations/Iteration2/url?"
+      payload = 'Url=https%3A//i1.wp.com/www.kalimbatutorials.com/wp-content/uploads/2020/05/Imahe-By-Magnus-Haven-Kalimba-Tabs-1-e1590120483133.jpg%3Fresize%3D1080%252C607%26ssl%3D1'
+      headers = {'Prediction-Key': 'de012887ce6147f18b0b2e27c3228860','ontent-Type': 'application/json','Content-Type': 'application/x-www-form-urlencoded'}
+
+      response = requests.request("POST", url, headers=headers, data = payload)
+
+      answer=response.json()['predictions'][2]['tagName']
+
+      return render_template("result.html",result = answer,url=answer)
 if __name__ == "__main__":
     app.run(debug=True)
