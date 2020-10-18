@@ -11,8 +11,8 @@ def home():
 def search_topic():
     return render_template("search_topic.html")
 
-@app.route("/result",methods = ['POST', 'GET'])
-def result():
+@app.route("/ans",methods = ['POST', 'GET'])
+def ans():
    if request.method == 'POST':
       result = request.form
       url = "https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/4f926a80-ab91-46c0-88e4-341f6e1ce08b/classify/iterations/Iteration2/url?"
