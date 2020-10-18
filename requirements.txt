@@ -13,3 +13,4 @@ matplotlib
 numpy
 oauth2client
 nltk
+requests
