@@ -20,7 +20,8 @@ def ans():
       headers = {'Prediction-Key': 'de012887ce6147f18b0b2e27c3228860','ontent-Type': 'application/json','Content-Type': 'application/x-www-form-urlencoded'}
 
       response = requests.request("POST", url, headers=headers, data = payload)
-
+      f = request.files['file']
+      f.save(secure_filename(f.filename))
       answer=response.json()['predictions'][2]['tagName']
 
       return render_template("ans.html",value=answer)
