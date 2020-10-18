@@ -23,6 +23,6 @@ def result():
 
       answer=response.json()['predictions'][2]['tagName']
 
-      return render_template("result.html",result = answer,url=answer)
+      return render_template("ans.html",value=answer)
 if __name__ == "__main__":
     app.run(debug=True)
